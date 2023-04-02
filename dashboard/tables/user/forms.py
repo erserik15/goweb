@@ -6,4 +6,4 @@ class UserForm(forms.ModelForm):
     address = forms.CharField(max_length=100)
     class Meta:
         model = User
-        fields = ['name','email']
+        fields = ['username','email','password']

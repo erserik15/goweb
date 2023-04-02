@@ -15,7 +15,7 @@ from .forms import *
 
 
 @login_required()
-@group_required(['user-owner'])
+@group_required(['admin'])
 def user_create(request):
     if request.method == 'POST':
         form = UserForm(request.POST, request.FILES)
@@ -30,7 +30,7 @@ def user_create(request):
     return render(request, 'dashboard/tables/form_base.html', {'form': form})
 
 @login_required()
-@group_required(['user-owner'])
+@group_required(['admin'])
 def user_edit(request, pk):
     user = get_object_or_404(user, pk=pk)
     if request.method == 'POST':
@@ -43,7 +43,7 @@ def user_edit(request, pk):
     return render(request, 'dashboard/tables/form_base.html', {'form': form, 'edit_url': reverse('dashboard:user_edit', kwargs={'pk': user.pk}) })
 
 @login_required
-@group_required(['user-owner'])
+@group_required(['admin'])
 def user_delete(request, pk):
     user = get_object_or_404(User, pk=pk)
     if request.method == 'POST':
@@ -77,7 +77,7 @@ class UserTable(tables.Table):
 
     class Meta:
         model = User
-        fields = ("id","title","date_joined" )
+        fields = ("id","username","email")
         attrs = {
             'class': 'table table-hover',
         }
@@ -99,4 +99,4 @@ class UserListView(LoginRequiredMixin,OwnerRequiredMixin,tables.SingleTableMixin
         return context
     
     def get_queryset(self, *args, **kwargs):
-        return User.objects.filter(owner = self.request.user)
+        return User.objects.all()

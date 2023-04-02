@@ -22,4 +22,4 @@ def getPath(dirs):
     return t
 
     
-convert(fr=getPath(['.','raw','login.html']),t=getPath(['.','auth','templates','auth','login.html']))
+convert(fr=getPath(['.','raw','login.html']),t=getPath(['.','authh','templates','authh','login.html']))

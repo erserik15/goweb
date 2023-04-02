@@ -47,8 +47,8 @@ def register_user(request):
             # return redirect("/login/")
 
         else:
-            msg = 'Form is not valid'
+            msg = 'Form is not valid'+str(form.errors)
     else:
         form = SignUpForm()
 
-    return render(request, "authh/login.html", {"form": form, "msg": msg, "success": success})
+    return render(request, "authh/register.html", {"form": form, "msg": msg, "success": success})
